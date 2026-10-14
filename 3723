@@ -1,0 +1,26 @@
+class Solution:
+    def maxSumOfSquares(self, num: int, sum_val: int) -> str:
+        # 1. Check if the sum is even possible with the given number of digits
+        if sum_val > 9 * num:
+            return ""
+        
+        # 2. Greedily extract as many 9s as possible
+        nines = sum_val // 9
+        remainder = sum_val % 9
+        
+        # 3. Build the result string in descending order to maximize the integer value
+        ans = []
+        
+        # Add all the 9s
+        for _ in range(nines):
+            ans.append('9')
+            
+        # Add the remainder digit if it's greater than 0
+        if remainder > 0:
+            ans.append(str(remainder))
+            
+        # Fill the rest of the slots with 0s to match the required length 'num'
+        while len(ans) < num:
+            ans.append('0')
+            
+        return "".join(ans)
